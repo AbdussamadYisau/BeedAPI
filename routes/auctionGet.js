@@ -8,15 +8,16 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 
 router.get('/auction', (req,res) => {
-    console.log(req.body);
 
     auctions.find({}, function (err, auction) {
-       if (err) {
-           throw err;
-       } else {
-        res.status(200).json({
-            auction
-        });
+        if (err) {
+            return res.json({
+                auction: "No auctions right now"
+            });
+        }else {
+            return res.status(200).json({
+                auction
+            });
        }
     });
 

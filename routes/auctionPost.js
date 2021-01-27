@@ -8,7 +8,6 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 
 router.post('/auction', (req,res) => {
-    console.log(req.body);
 
     const auction = new auctions({
         title: req.body.title,
