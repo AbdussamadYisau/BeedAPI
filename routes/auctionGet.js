@@ -12,7 +12,7 @@ router.get('/auction', (req,res) => {
     auctions.find({}, function (err, auction) {
         if (err) {
             return res.json({
-                auction: "No auctions right now!"
+                auction: "No auctions right now"
             });
         }else {
             return res.status(200).json({
