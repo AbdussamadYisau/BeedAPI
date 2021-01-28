@@ -7,7 +7,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
 
-router.post('/auction', (req,res) => {
+router.post('/auction', async (req,res) => {
 
     const auction = new auctions({
         title: req.body.title,
@@ -18,16 +18,13 @@ router.post('/auction', (req,res) => {
         picture: req.body.picture
     });
 
-    auction.save(function (err) {
-        if (err) {
-            throw err;
 
-        } else {
-                res.status(200).json({
-                    result: "Uploaded successfully"
-                });
-        }
-    });
+    try {
+        const savedAuction = await auction.save()
+        res.json(savedAuction);
+    } catch(err) {
+        res.json({message: err});
+    }
 
      
 });

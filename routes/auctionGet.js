@@ -7,19 +7,26 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
 
-router.get('/auction', (req,res) => {
+router.get('/auction', async (req,res) => {
 
-    auctions.find({}, function (err, auction) {
-        if (err) {
-            return res.json({
-                auction: "No auctions right now"
-            });
-        }else {
-            return res.status(200).json({
-                auction
-            });
-       }
-    });
+    // auctions.find({}, function (err, auction) {
+    //     if (err) {
+    //         return res.json({
+    //             auction: "No auctions right now"
+    //         });
+    //     }else {
+    //         return res.status(200).json({
+    //             auction
+    //         });
+    //    }
+    // });
+
+    try {
+        const getAuctions = await auctions.find();
+        res.json(getAuctions);
+    } catch(err) {
+        res.json({message: err});
+    }
 
      
 });
