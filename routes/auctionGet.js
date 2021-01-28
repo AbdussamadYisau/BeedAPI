@@ -1,34 +1,18 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const auctions = require('../models/auctions');
-const bodyParser = require('body-parser');
+const auctions = require("../models/auctions");
+const bodyParser = require("body-parser");
 
-router.use(bodyParser.json()); 
-router.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
-
-router.get('/auction', async (req,res) => {
-
-    // auctions.find({}, function (err, auction) {
-    //     if (err) {
-    //         return res.json({
-    //             auction: "No auctions right now"
-    //         });
-    //     }else {
-    //         return res.status(200).json({
-    //             auction
-    //         });
-    //    }
-    // });
-
-    try {
-        const getAuctions = await auctions.find();
-        res.json(getAuctions);
-    } catch(err) {
-        res.json({message: err});
-    }
-
-     
+router.get("/auction", async (req, res) => {
+  try {
+    const getAuctions = await auctions.find();
+    res.json(getAuctions);
+  } catch (err) {
+    res.json({ message: err });
+  }
 });
 
 module.exports = router;
