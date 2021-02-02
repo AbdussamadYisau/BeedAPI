@@ -7,13 +7,10 @@ const auctionGet = require("./routes/auctionGet");
 const cors = require("cors");
 require("dotenv/config");
 
-// Middlewares
-app.use(bodyParser.json()); // application/json
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // For CORs
 
-app.use(cors());
+// app.use(cors());
 
 app.use((req,res,next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,6 +18,12 @@ app.use((req,res,next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
+
+
+// Middlewares
+app.use(bodyParser.json()); // application/json
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Routes
 app.use(auctionPost);
